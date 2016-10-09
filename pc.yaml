@@ -1,0 +1,64 @@
+- hosts: pc
+  tasks:
+
+  - name: Create src directory
+    file:
+      path: "{{ lookup('env','HOME') }}/src"
+      state: directory
+
+  - name: Add enpass apt key
+    apt_key:
+      url: http://repo.sinew.in/keys/enpass-linux.key
+      state: present
+    remote_user: root
+    become: yes
+    become_method: sudo
+
+  - name: Add enpass repository
+    apt_repository:
+      repo: "deb http://repo.sinew.in/ stable main"
+      state: present
+    remote_user: root
+    become: yes
+    become_method: sudo
+
+  - name: Install enpass
+    apt:
+      name: enpass
+      state: present
+    remote_user: root
+    become: yes
+    become_method: sudo
+
+  - name: Install git
+    apt:
+      name: git
+      state: present
+    remote_user: root
+    become: yes
+    become_method: sudo
+    
+  - name: Install vim
+    apt:
+      name: vim
+      state: present
+    remote_user: root
+    become: yes
+    become_method: sudo
+    
+  - name: Add pycharm ppa
+    add_ppa:
+      name: ppa:mystic-mirage/pycharm
+    remote_user: root
+    become: yes
+    become_method: sudo
+  
+  - name: Install pycharm
+    apt:
+      name: pycharm
+      state: present
+      update_cache: yes
+    remote_user: root
+    become: yes
+    become_method: sudo
+
