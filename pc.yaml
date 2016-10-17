@@ -55,9 +55,17 @@
   
   - name: Install pycharm
     apt:
-      name: pycharm
+      name: pycharm-community
       state: present
       update_cache: yes
+    remote_user: root
+    become: yes
+    become_method: sudo
+
+  - name: Istall smplayer
+    apt:
+      name: smplayer
+      state: present
     remote_user: root
     become: yes
     become_method: sudo
