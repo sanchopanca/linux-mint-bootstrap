@@ -1,0 +1,1 @@
+ansible-playbook pc.yaml -i inventory --ask-become-pass
